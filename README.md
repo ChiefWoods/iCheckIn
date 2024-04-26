@@ -55,3 +55,45 @@ PASSWORD=<YOUR IZONE PASSWORD HERE>
 ```
 python main.py 12345
 ```
+
+## Tips
+
+Create a simple terminal script and run it from your desktop to shave down even more time!
+
+### Powershell
+
+```
+cd "path\to\iCheckIn" # Change this to the path of your iCheckIn directory
+
+$code = Read-Host -Prompt "Enter iCheckIn code"
+
+Write-Host "Checking in with code $code..."
+
+python main.py $code
+```
+
+### Bash
+
+```
+#!/bin/bash
+
+cd /path/to/iCheckIn # Change this to the path of your iCheckIn directory
+
+read -p "Enter iCheckIn code: " code
+
+echo "Checking in with code $code..."
+
+python3 main.py "$code"
+```
+
+## Issues
+
+View the [open issues](https://github.com/ChiefWoods/iCheckIn/issues) for a full list of proposed features and known bugs.
+
+## Acknowledgements
+
+Credits to Rachel Lim Wei Hui for the original script.
+
+## Contact
+
+[chii.yuen@hotmail.com](mailto:chii.yuen@hotmail.com)
