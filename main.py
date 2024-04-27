@@ -54,27 +54,20 @@ class Browser:
         self.add_input(by=By.ID, value='checkin_code', text=code)
         self.click_button(by=By.ID, value='iCheckin')
 
-    # get the notification element
-    def get_notification(self):
-        return self.browser.find_element(
-            by=By.ID, value='notification')
-
-    # check if check in is successful
-    def is_check_in_successful(self, notification):
-        return 'alert-success' in notification.get_attribute('class')
-
     # check into class
     def check_in(self, code: str):
-        self.enter_code(code)
-        notification = self.get_notification()
-        check_in_success = self.is_check_in_successful(notification)
+        notification, check_in_success = None, False
 
         while not check_in_success:
-            print('Error:', notification.text)
-            code = input("Enter new code: ")
             self.enter_code(code)
-            notification = self.get_notification()
-            check_in_success = self.is_check_in_successful(notification)
+            notification = self.browser.find_element(
+                by=By.ID, value='notification')
+            check_in_success = 'alert-success' in notification.get_attribute(
+                'class')
+
+            if not check_in_success:
+                print('Error:', notification.text)
+                code = input("Enter new code: ")
 
         print('Success:', notification.text)
 
