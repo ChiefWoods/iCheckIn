@@ -1,11 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from dotenv import load_dotenv
 import os
 import time
 import argparse
 import re
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 load_dotenv()
 
@@ -18,7 +21,12 @@ class Browser:
 
     def __init__(self, driver: str):
         self.service = Service(driver)
-        self.browser = webdriver.Chrome(service=self.service)
+        options = Options()
+        options.add_argument('--log-level=1')
+        self.browser = webdriver.Chrome(
+            service=self.service,
+            options=options
+        )
 
     # navigate to page url
     def goto(self, url: str):
